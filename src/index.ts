@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { env } from 'hono/adapter';
+import { cors } from 'hono/cors';
 import { Resend } from 'resend';
 
 type Env = {
@@ -14,6 +15,7 @@ type ContactForm = {
 };
 
 const app = new Hono();
+app.use('*', cors());
 
 app.get('/', (c) => {
   return c.text('Worker Running');
@@ -27,7 +29,7 @@ app.post('/contact', async (c) => {
   const { name, email, message } = body;
 
   if (!name || !email || !message) {
-    return c.json({ message: 'All fields are required' }, 400);
+    return c.json({ success: false, message: 'All fields are required' }, 400);
   }
 
   const html = `
@@ -121,10 +123,10 @@ app.post('/contact', async (c) => {
   });
 
   if (sendError) {
-    return c.json({ error: sendError.message }, 403);
+    return c.json({ success: false, error: sendError.message }, 403);
   }
 
-  return c.json({ message: 'Sent successfully' });
+  return c.json({ success: true });
 });
 
 export default app;
