@@ -116,7 +116,7 @@ app.post('/contact', async (c) => {
 `;
 
   const { error: sendError } = await resend.emails.send({
-    from: 'contact@easybits.xyz',
+    from: 'contact@dhamivibez.name.ng',
     to: EMAIL_RECEIVER,
     subject: `New Message from ${name}`,
     html: html,
