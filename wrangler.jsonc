@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "dhamivibez-contact",
+  "name": "mika-portfolio-contact-backend",
   "main": "src/index.ts",
   "compatibility_date": "2025-05-04"
   // "compatibility_flags": [
